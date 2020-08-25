@@ -1,4 +1,5 @@
-﻿using Windows.Devices.Gpio;
+﻿using System;
+using Windows.Devices.Gpio;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -47,11 +48,78 @@ namespace HalloweenPumpkin
         {
             if (pinValue == GpioPinValue.High)
             {
+                for (int i = 0; i < 6; i++)
+                {
+                    for (int y = 0; y < 7; y++)
+                    {
+                        pinValue = GpioPinValue.Low;
+                        pin.Write(pinValue);
+                        System.Threading.Tasks.Task.Delay(350).Wait();
+
+                        pinValue = GpioPinValue.High;
+                        pin.Write(pinValue);
+                        System.Threading.Tasks.Task.Delay(350).Wait();
+                    }
+
+                    for (int x = 0; x < 3; x++)
+                    {
+                        pinValue = GpioPinValue.Low;
+                        pin.Write(pinValue);
+                        System.Threading.Tasks.Task.Delay(100).Wait();
+
+                        pinValue = GpioPinValue.High;
+                        pin.Write(pinValue);
+                        System.Threading.Tasks.Task.Delay(150).Wait();
+                    }
+                }
+
                 pinValue = GpioPinValue.Low;
                 pin.Write(pinValue);
             }
             else
             {
+                var initialDelay = 975;
+                for (int i = 0; i < 10; i++)
+                {
+                    var currentDelay = initialDelay - (i * 100);
+
+                    pinValue = GpioPinValue.High;
+                    pin.Write(pinValue);
+                    System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+
+                    pinValue = GpioPinValue.Low;
+                    pin.Write(pinValue);
+                    System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+
+
+                    if (currentDelay > 100 && currentDelay < 300)
+                    {
+                        for (int j = 0; j < 15; j++)
+                        {
+                            pinValue = GpioPinValue.High;
+                            pin.Write(pinValue);
+                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+
+                            pinValue = GpioPinValue.Low;
+                            pin.Write(pinValue);
+                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                        }
+                    }
+                    if (currentDelay < 100)
+                    {
+                        for (int j = 0; j < 30; j++)
+                        {
+                            pinValue = GpioPinValue.High;
+                            pin.Write(pinValue);
+                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+
+                            pinValue = GpioPinValue.Low;
+                            pin.Write(pinValue);
+                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                        }
+                    }
+                }
+
                 pinValue = GpioPinValue.High;
                 pin.Write(pinValue);
             }
