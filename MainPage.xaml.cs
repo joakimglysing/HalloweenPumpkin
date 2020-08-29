@@ -7,8 +7,14 @@ namespace HalloweenPumpkin
 {
     public sealed partial class MainPage : Page
     {
-        private const int LED_PIN = 5;
-        private GpioPin pin;
+        private const int LED_PIN_WHITE = 5;
+        private const int LED_PIN_AMBER = 12;
+        private const int LED_PIN_RED_1 = 20;
+        private const int LED_PIN_RED_2 = 21;
+        private GpioPin pin_white;
+        private GpioPin pin_amber;
+        private GpioPin pin_red_1;
+        private GpioPin pin_red_2;
         private GpioPinValue pinValue;
         private DispatcherTimer timer;
 
@@ -22,7 +28,10 @@ namespace HalloweenPumpkin
 
             InitGPIO();
 
-            if (pin != null)
+            if (pin_white != null &&
+                pin_amber != null &&
+                pin_red_1 != null &&
+                pin_red_2 != null)
             {
                 timer.Start();
             }
@@ -34,14 +43,35 @@ namespace HalloweenPumpkin
 
             if (gpio == null)
             {
-                pin = null;
+                pin_white = null;
+                pin_amber = null;
+                pin_red_1 = null;
+                pin_red_2 = null;
                 return;
             }
 
-            pin = gpio.OpenPin(LED_PIN);
+            pin_white = gpio.OpenPin(LED_PIN_WHITE);
+            pin_amber = gpio.OpenPin(LED_PIN_AMBER);
+            pin_red_1 = gpio.OpenPin(LED_PIN_RED_1);
+            pin_red_2 = gpio.OpenPin(LED_PIN_RED_2);
             pinValue = GpioPinValue.High;
-            pin.Write(pinValue);
-            pin.SetDriveMode(GpioPinDriveMode.Output);
+            pin_white.Write(pinValue);
+            pin_white.SetDriveMode(GpioPinDriveMode.Output);
+            pin_amber.Write(pinValue);
+            pin_amber.SetDriveMode(GpioPinDriveMode.Output);
+            pin_red_1.Write(pinValue);
+            pin_red_1.SetDriveMode(GpioPinDriveMode.Output);
+            pin_red_2.Write(pinValue);
+            pin_red_2.SetDriveMode(GpioPinDriveMode.Output);
+        }
+
+        private void SetAllLeds(GpioPinValue value, int delayMilliseconds)
+        {
+            pin_white.Write(value);
+            pin_amber.Write(value);
+            pin_red_1.Write(value);
+            pin_red_2.Write(value);
+            System.Threading.Tasks.Task.Delay(delayMilliseconds).Wait();
         }
 
         private void Timer_Tick(object sender, object e)
@@ -53,28 +83,24 @@ namespace HalloweenPumpkin
                     for (int y = 0; y < 7; y++)
                     {
                         pinValue = GpioPinValue.Low;
-                        pin.Write(pinValue);
-                        System.Threading.Tasks.Task.Delay(350).Wait();
+                        SetAllLeds(pinValue, 350);
 
                         pinValue = GpioPinValue.High;
-                        pin.Write(pinValue);
-                        System.Threading.Tasks.Task.Delay(350).Wait();
+                        SetAllLeds(pinValue, 350);
                     }
 
                     for (int x = 0; x < 3; x++)
                     {
                         pinValue = GpioPinValue.Low;
-                        pin.Write(pinValue);
-                        System.Threading.Tasks.Task.Delay(100).Wait();
+                        SetAllLeds(pinValue, 100);
 
                         pinValue = GpioPinValue.High;
-                        pin.Write(pinValue);
-                        System.Threading.Tasks.Task.Delay(150).Wait();
+                        SetAllLeds(pinValue, 150);
                     }
                 }
 
                 pinValue = GpioPinValue.Low;
-                pin.Write(pinValue);
+                SetAllLeds(pinValue, 0);
             }
             else
             {
@@ -84,12 +110,10 @@ namespace HalloweenPumpkin
                     var currentDelay = initialDelay - (i * 100);
 
                     pinValue = GpioPinValue.High;
-                    pin.Write(pinValue);
-                    System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                    SetAllLeds(pinValue, currentDelay);
 
                     pinValue = GpioPinValue.Low;
-                    pin.Write(pinValue);
-                    System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                    SetAllLeds(pinValue, currentDelay);
 
 
                     if (currentDelay > 100 && currentDelay < 300)
@@ -97,12 +121,10 @@ namespace HalloweenPumpkin
                         for (int j = 0; j < 15; j++)
                         {
                             pinValue = GpioPinValue.High;
-                            pin.Write(pinValue);
-                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                            SetAllLeds(pinValue, currentDelay);
 
                             pinValue = GpioPinValue.Low;
-                            pin.Write(pinValue);
-                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                            SetAllLeds(pinValue, currentDelay);
                         }
                     }
                     if (currentDelay < 100)
@@ -110,18 +132,16 @@ namespace HalloweenPumpkin
                         for (int j = 0; j < 30; j++)
                         {
                             pinValue = GpioPinValue.High;
-                            pin.Write(pinValue);
-                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                            SetAllLeds(pinValue, currentDelay);
 
                             pinValue = GpioPinValue.Low;
-                            pin.Write(pinValue);
-                            System.Threading.Tasks.Task.Delay(currentDelay).Wait();
+                            SetAllLeds(pinValue, currentDelay);
                         }
                     }
                 }
 
                 pinValue = GpioPinValue.High;
-                pin.Write(pinValue);
+                SetAllLeds(pinValue, 0);
             }
         }
     }

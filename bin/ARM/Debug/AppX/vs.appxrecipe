@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\OneDrive\Dev\Projects\IoT\Halloween-Pumpkin\bin\ARM\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2020-08-25T18:00:32.768</Modified>
+      <Modified>2020-08-29T19:44:28.114</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\OneDrive\Dev\Projects\IoT\Halloween-Pumpkin\bin\ARM\Debug\HalloweenPumpkin.exe">
       <PackagePath>entrypoint\HalloweenPumpkin.exe</PackagePath>
-      <Modified>2020-08-25T18:00:32.306</Modified>
+      <Modified>2020-08-29T19:44:27.689</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\joaki\.nuget\packages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -538,11 +538,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\OneDrive\Dev\Projects\IoT\Halloween-Pumpkin\bin\ARM\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2020-08-25T17:37:22.741</Modified>
+      <Modified>2020-08-29T19:44:27.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\OneDrive\Dev\Projects\IoT\Halloween-Pumpkin\bin\ARM\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2020-08-25T17:37:22.741</Modified>
+      <Modified>2020-08-29T19:44:27.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.17763.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -554,7 +554,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\OneDrive\Dev\Projects\IoT\Halloween-Pumpkin\bin\ARM\Debug\Core\HalloweenPumpkin.exe">
       <PackagePath>HalloweenPumpkin.exe</PackagePath>
-      <Modified>2020-08-25T18:00:32.745</Modified>
+      <Modified>2020-08-29T19:44:28.097</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
