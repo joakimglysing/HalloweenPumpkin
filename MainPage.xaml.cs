@@ -23,7 +23,7 @@ namespace HalloweenPumpkin
             this.InitializeComponent();
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromMilliseconds(2000);
             timer.Tick += Timer_Tick;
 
             InitGPIO();
@@ -78,18 +78,18 @@ namespace HalloweenPumpkin
         {
             if (pinValue == GpioPinValue.High)
             {
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 7; i++)
                 {
-                    for (int y = 0; y < 7; y++)
+                    for (int y = 0; y < 10; y++)
                     {
                         pinValue = GpioPinValue.Low;
-                        SetAllLeds(pinValue, 350);
+                        SetAllLeds(pinValue, 400);
 
                         pinValue = GpioPinValue.High;
-                        SetAllLeds(pinValue, 350);
+                        SetAllLeds(pinValue, 400);
                     }
 
-                    for (int x = 0; x < 3; x++)
+                    for (int x = 0; x < 5; x++)
                     {
                         pinValue = GpioPinValue.Low;
                         SetAllLeds(pinValue, 100);
@@ -104,38 +104,41 @@ namespace HalloweenPumpkin
             }
             else
             {
-                var initialDelay = 975;
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    var currentDelay = initialDelay - (i * 100);
-
-                    pinValue = GpioPinValue.High;
-                    SetAllLeds(pinValue, currentDelay);
-
-                    pinValue = GpioPinValue.Low;
-                    SetAllLeds(pinValue, currentDelay);
-
-
-                    if (currentDelay > 100 && currentDelay < 300)
+                    var initialDelay = 975;
+                    for (int y = 0; y < 10; y++)
                     {
-                        for (int j = 0; j < 15; j++)
-                        {
-                            pinValue = GpioPinValue.High;
-                            SetAllLeds(pinValue, currentDelay);
+                        var currentDelay = initialDelay - (y * 100);
 
-                            pinValue = GpioPinValue.Low;
-                            SetAllLeds(pinValue, currentDelay);
+                        pinValue = GpioPinValue.High;
+                        SetAllLeds(pinValue, currentDelay);
+
+                        pinValue = GpioPinValue.Low;
+                        SetAllLeds(pinValue, currentDelay);
+
+
+                        if (currentDelay > 100 && currentDelay < 300)
+                        {
+                            for (int j = 0; j < 15; j++)
+                            {
+                                pinValue = GpioPinValue.High;
+                                SetAllLeds(pinValue, currentDelay);
+
+                                pinValue = GpioPinValue.Low;
+                                SetAllLeds(pinValue, currentDelay);
+                            }
                         }
-                    }
-                    if (currentDelay < 100)
-                    {
-                        for (int j = 0; j < 30; j++)
+                        if (currentDelay < 100)
                         {
-                            pinValue = GpioPinValue.High;
-                            SetAllLeds(pinValue, currentDelay);
+                            for (int j = 0; j < 30; j++)
+                            {
+                                pinValue = GpioPinValue.High;
+                                SetAllLeds(pinValue, currentDelay);
 
-                            pinValue = GpioPinValue.Low;
-                            SetAllLeds(pinValue, currentDelay);
+                                pinValue = GpioPinValue.Low;
+                                SetAllLeds(pinValue, currentDelay);
+                            }
                         }
                     }
                 }
